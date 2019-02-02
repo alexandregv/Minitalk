@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:36:31 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/01/17 13:54:45 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/02 16:00:44 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int					ft_str_copy_to(char **dst, char *src, char c);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t n);
 int					get_next_line(const int fd, char **line);
 void				ft_die(char *msg, int status);
-char        **ft_sort_table(char **table, size_t size);
-int         ft_pow(int x, int y);
-char		  	*ft_realloc(char *s, int size);
+char				**ft_sort_table(char **table, size_t size);
+int					ft_pow(int x, int y);
+char				*ft_realloc(char *s, int size);
 
 #endif
