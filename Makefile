@@ -6,7 +6,7 @@
 #    By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/02 15:50:47 by aguiot--          #+#    #+#              #
-#    Updated: 2019/02/02 15:50:54 by aguiot--         ###   ########.fr        #
+#    Updated: 2019/02/02 21:36:40 by aguiot--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ DEPS			= libft/libft.h include/minitalk.h Makefile
 
 # Source files
 SRC_PATH				= src/
-SRC_SERVER_NAME	= server utils
-SRC_CLIENT_NAME	= client utils
+SRC_SERVER_NAME	= server utils ping
+SRC_CLIENT_NAME	= client utils ping
 SRC_SERVER			= $(addsuffix .c, $(SRC_SERVER_NAME))
 SRC_CLIENT			= $(addsuffix .c, $(SRC_CLIENT_NAME))
 

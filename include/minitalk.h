@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:54:58 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/02 15:55:00 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/02 21:37:26 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <signal.h>
 # include "libft.h"
 
-int *ft_dec_to_bin(int ci);
-int ft_bin_to_dec(int *b);
+int		*ft_dec_to_bin(int dec);
+int		ft_bin_to_dec(int *bin);
+int		ft_ping_getset(int mode, int pid);
+void	ft_pong_handler(int sig, siginfo_t *info, void *context);
+void	ft_handle_pong(void);
 
 #endif
