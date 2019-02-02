@@ -1,0 +1,7 @@
+obj/
+a.out
+server
+client
+*.dSYM
+*.dwarf
+*.o
