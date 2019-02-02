@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/02 15:53:27 by aguiot--          #+#    #+#             */
+/*   Updated: 2019/02/02 21:44:33 by aguiot--         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-void	ft_send(pid_t pid, int *b)
+static void	ft_send(pid_t pid, int *b)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i < 8)
@@ -28,10 +40,10 @@ void	ft_send(pid_t pid, int *b)
 	}
 }
 
-int   ft_transcript(pid_t pid, char *s)
+static int	ft_transcript(pid_t pid, char *s)
 {
-	int i;
-	int *b;
+	int		i;
+	int		*b;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -42,21 +54,21 @@ int   ft_transcript(pid_t pid, char *s)
 	}
 	b = ft_dec_to_bin((int)'\0');
 	ft_send(pid, b);
-  return (0);
+	return (0);
 }
 
-int   main(int ac, char **av)
+int			main(int ac, char **av)
 {
-  pid_t pid;
+	pid_t	pid;
 
 	if (ac == 3)
-  {
-    pid = ft_atoi(av[1]);
-    if (pid == 0 || pid == -1)
-		  ft_putendl_fd("Invalid PID", 2);
-    else
-		  return (ft_transcript(pid, av[2]));
-  }
+	{
+		pid = ft_atoi(av[1]);
+		if (pid == 0 || pid == -1)
+			ft_putendl_fd("Invalid PID", 2);
+		else
+			return (ft_transcript(pid, av[2]));
+	}
 	else
 		ft_putendl_fd("Usage: ./client PID message", 2);
 	return (1);

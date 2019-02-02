@@ -6,15 +6,15 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:53:03 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/01/17 13:54:57 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/02 15:55:32 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-void  ft_die(char *msg, int status)
+void	ft_die(char *msg, int status)
 {
-  ft_putendl_fd(msg, status == 0 ? 1 : 2);
-  exit(status);
+	ft_putendl_fd(msg, status == 0 ? 1 : 2);
+	exit(status);
 }
