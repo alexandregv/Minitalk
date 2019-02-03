@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:27 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 17:00:00 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 23:20:48 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,21 @@
 static void	ft_send_char(pid_t pid, int *bin)
 {
 	int		i;
+	int		sig;
 
 	i = 0;
 	while (i < 8)
 	{
 		if (bin[i] == 0)
+			sig = SIGUSR1;
+		else if (bin[i] == 1)
+			sig = SIGUSR2;
+		if (kill(pid, sig) == -1)
 		{
-			if (kill(pid, SIGUSR1) == -1)
-			{
-				ft_putendl_fd("An error occured while sending bit '0'.", 2);
-				exit(1);
-			}
-		}
-		if (bin[i] == 1)
-		{
-			if (kill(pid, SIGUSR2) == -1)
-			{
-				ft_putendl_fd("An error occured while sending bit '1'.", 2);
-				exit(1);
-			}
+			ft_putendl_fd(sig == SIGUSR1
+				? "An error occured while sending bit '0'."
+				: "An error occured while sending bit '1'.", 2);
+			exit(1);
 		}
 		usleep(150);
 		++i;
