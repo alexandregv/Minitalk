@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:42 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 14:34:24 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 16:54:29 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@ static void	ft_print_header(void)
 	ft_putendl(" \"message\"");
 }
 
-static char	*ft_decode_append(char *str, int *tmp)
+static char	*ft_decode_append(char *str, int *tmp, int seqcount)
 {
 	static int	i = 0;
 
 	if (i > BUFF_SIZE)
 		str = ft_realloc(str, sizeof(char) * (ft_strlen(str) + BUFF_SIZE));
-	str[i++] = (char)ft_bin_to_dec(tmp);
+	while (seqcount > 0)
+	{
+		str[i++] = (char)ft_bin_to_dec(tmp);
+		--seqcount;
+	}
+	//(void)seqcount;
+	//str[i++] = (char)ft_bin_to_dec(tmp);
 	if ((char)ft_bin_to_dec(tmp) == '\0')
 	{
 		ft_putstr("Ping from PID ");
@@ -67,19 +73,31 @@ int			main(void)
 	int					i;
 	int					*tmp;
 	char				*str;
+	int					seqcount;
+	int					seqmode;
 
-	i = 0;
 	g_binary = (int*)(malloc(sizeof(int) * 8));
 	str = (char*)malloc(sizeof(char) * BUFF_SIZE);
 	ft_bzero(g_binary, 8);
 	tmp = g_binary;
 	ft_print_header();
 	ft_handle_sigusr();
+	seqmode = 0;
+	i = 0;
 	while (1)
 	{
-		if (i > 7)
+		if (i == 8 && seqmode == 0)
 		{
-			str = ft_decode_append(str, tmp);
+			g_binary -= 8;
+			seqcount = ft_bin_to_dec(g_binary);
+			seqmode = 1;
+			i = 0;
+		}
+		if (i == 8 && seqmode == 1)
+		{
+			str = ft_decode_append(str, tmp, seqcount);
+			seqcount = 0;
+			seqmode = 0;
 			i = 0;
 		}
 		pause();
