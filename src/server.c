@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:42 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 17:18:00 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 23:26:43 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,14 @@ static void	ft_sigusr_handler(int sig, siginfo_t *info, void *cont)
 	(void)cont;
 }
 
-static void	ft_handle_sigusr(void)
+void		ft_while(char *str, int *tmp)
 {
-	struct sigaction	action;
+	int i;
+	int seqmode;
+	int seqcount;
 
-	action.sa_sigaction = ft_sigusr_handler;
-	action.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &action, NULL);
-	sigaction(SIGUSR2, &action, NULL);
-}
-
-int			main(void)
-{
-	int					i;
-	int					*tmp;
-	char				*str;
-	int					seqcount;
-	int					seqmode;
-
-	g_binary = (int*)(malloc(sizeof(int) * 8));
-	str = (char*)malloc(sizeof(char) * BUFF_SIZE);
-	ft_bzero(g_binary, 8);
-	tmp = g_binary;
-	ft_print_header();
-	ft_handle_sigusr();
-	seqmode = 0;
 	i = 0;
+	seqmode = 0;
 	while (1)
 	{
 		if (i == 8 && seqmode == 0)
@@ -101,6 +83,24 @@ int			main(void)
 		++i;
 		pause();
 	}
+}
+
+int			main(void)
+{
+	struct sigaction	action;
+	int					*tmp;
+	char				*str;
+
+	g_binary = (int*)(malloc(sizeof(int) * 8));
+	str = (char*)malloc(sizeof(char) * BUFF_SIZE);
+	ft_bzero(g_binary, 8);
+	tmp = g_binary;
+	ft_print_header();
+	action.sa_sigaction = ft_sigusr_handler;
+	action.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
+	ft_while(str, tmp);
 	free(g_binary);
 	free(str);
 	return (0);
