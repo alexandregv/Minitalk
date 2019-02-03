@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:27 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 17:15:42 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:37:03 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,19 @@ static void	ft_send_seqcount(pid_t pid, int *bin)
 	while (i < 8)
 	{
 		if (bin[i] == 0)
-		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
-				ft_putendl_fd(C_RED"An error occured while sending bit '0' in seqcount."C_NONE, 2);
+				ft_putendl_fd(C_RED"An error occured while sending bit '0' \
+in seqcount."C_NONE, 2);
 				exit(1);
 			}
-		}
 		if (bin[i] == 1)
-		{
 			if (kill(pid, SIGUSR2) == -1)
 			{
-				ft_putendl_fd(C_RED"An error occured while sending bit '1' in seqvalue."C_NONE, 2);
+				ft_putendl_fd(C_RED"An error occured while sending bit '1' \
+in seqvalue."C_NONE, 2);
 				exit(1);
 			}
-		}
 		usleep(150);
 		++i;
 	}
@@ -48,21 +46,19 @@ static void	ft_send_seqvalue(pid_t pid, int *bin)
 	while (i < 8)
 	{
 		if (bin[i] == 0)
-		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
-				ft_putendl_fd(C_RED"An error occured while sending bit '0'."C_NONE, 2);
+				ft_putendl_fd(C_RED"An error occured while sending bit '0' \
+."C_NONE, 2);
 				exit(1);
 			}
-		}
 		if (bin[i] == 1)
-		{
 			if (kill(pid, SIGUSR2) == -1)
 			{
-				ft_putendl_fd(C_RED"An error occured while sending bit '1'."C_NONE, 2);
+				ft_putendl_fd(C_RED"An error occured while sending bit '1' \
+."C_NONE, 2);
 				exit(1);
 			}
-		}
 		usleep(150);
 		++i;
 	}
@@ -91,7 +87,7 @@ static int	ft_send_text(pid_t pid, char *s)
 int			main(int ac, char **av)
 {
 	pid_t	pid;
-	
+
 	ft_handle_pong();
 	if (ac == 3)
 	{
