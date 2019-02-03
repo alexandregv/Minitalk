@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:54:58 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/02 21:37:26 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:13:57 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <stdlib.h>
 # include <signal.h>
 # include "libft.h"
+
+# define C_NONE    "\033[0m"
+# define C_RED     "\033[31m"
+# define C_CYAN    "\033[36m"
+# define C_MAGENTA "\033[35m"
 
 int		*ft_dec_to_bin(int dec);
 int		ft_bin_to_dec(int *bin);

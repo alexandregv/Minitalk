@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:42 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 16:54:29 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:15:08 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	ft_print_header(void)
 	pid_t				pid;
 
 	pid = getpid();
-	ft_putstr("You can now send messages with: ./client ");
+	ft_putstr("You can now send messages with: ./client "C_MAGENTA);
 	ft_putnbr(pid);
-	ft_putendl(" \"message\"");
+	ft_putendl(C_NONE" \"message\""C_NONE);
 }
 
 static char	*ft_decode_append(char *str, int *tmp, int seqcount)
@@ -35,13 +35,11 @@ static char	*ft_decode_append(char *str, int *tmp, int seqcount)
 		str[i++] = (char)ft_bin_to_dec(tmp);
 		--seqcount;
 	}
-	//(void)seqcount;
-	//str[i++] = (char)ft_bin_to_dec(tmp);
 	if ((char)ft_bin_to_dec(tmp) == '\0')
 	{
-		ft_putstr("Ping from PID ");
+		ft_putstr(C_CYAN"Ping from PID ");
 		ft_putnbr(ft_ping_getset(0, 0));
-		ft_putendl(" !");
+		ft_putendl(" !"C_NONE);
 		ft_putendl(str);
 		kill(ft_ping_getset(0, 0), SIGUSR1);
 		i = 0;
