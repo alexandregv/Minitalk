@@ -6,20 +6,20 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:27 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 14:29:56 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:00:00 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	ft_send_char(pid_t pid, int *b)
+static void	ft_send_char(pid_t pid, int *bin)
 {
 	int		i;
 
 	i = 0;
 	while (i < 8)
 	{
-		if (b[i] == 0)
+		if (bin[i] == 0)
 		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
@@ -27,7 +27,7 @@ static void	ft_send_char(pid_t pid, int *b)
 				exit(1);
 			}
 		}
-		if (b[i] == 1)
+		if (bin[i] == 1)
 		{
 			if (kill(pid, SIGUSR2) == -1)
 			{
@@ -36,24 +36,21 @@ static void	ft_send_char(pid_t pid, int *b)
 			}
 		}
 		usleep(150);
-		i++;
+		++i;
 	}
 }
 
-static int	ft_send_word(pid_t pid, char *s)
+static int	ft_send_text(pid_t pid, char *text)
 {
 	int		i;
-	int		*b;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (text[i] != '\0')
 	{
-		b = ft_dec_to_bin((int)s[i]);
-		ft_send_char(pid, b);
-		i++;
+		ft_send_char(pid, ft_dec_to_bin((int)text[i]));
+		++i;
 	}
-	b = ft_dec_to_bin((int)'\0');
-	ft_send_char(pid, b);
+	ft_send_char(pid, ft_dec_to_bin((int)'\0'));
 	return (0);
 }
 
@@ -67,7 +64,7 @@ int			main(int ac, char **av)
 		if (pid == 0 || pid == -1)
 			ft_putendl_fd("Invalid PID", 2);
 		else
-			return (ft_send_word(pid, av[2]));
+			return (ft_send_text(pid, av[2]));
 	}
 	else
 		ft_putendl_fd("Usage: ./client PID message", 2);

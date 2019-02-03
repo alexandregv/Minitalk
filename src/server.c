@@ -6,7 +6,7 @@
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:53:42 by aguiot--          #+#    #+#             */
-/*   Updated: 2019/02/03 14:30:27 by aguiot--         ###   ########.fr       */
+/*   Updated: 2019/02/03 16:59:20 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int			main(void)
 	signal(SIGUSR2, ft_handle_sigusr);
 	while (1)
 	{
-		if (i > 7)
+		if (i == 8)
 		{
 			str = ft_decode_append(str, tmp);
 			i = 0;
 		}
 		pause();
-		i++;
+		++i;
 	}
 	free(g_binary);
 	free(str);
